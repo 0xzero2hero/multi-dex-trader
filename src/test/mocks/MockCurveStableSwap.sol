@@ -4,19 +4,22 @@ pragma solidity ^0.8.13;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract MockCurveStableSwap {
-	uint256 private swapRate = 1; // swapRate = reserve1 / reserve0
-
+	uint256 private swapRate;
 	address[] private _coins;
 
-	function coins(uint256 index) external view returns (address) {
-		return _coins[index];
-	}
+	event Exchanged(int128 indexed i, int128 indexed j, uint256 dx, uint256 dy);
 
-	constructor(address[] memory _tokens) {
+	constructor(address[] memory _tokens, uint256 _swapRate) {
 		_coins = new address[](_tokens.length);
+		swapRate = _swapRate;
 		for (uint256 i; i < _tokens.length; i++) {
 			_coins[i] = _tokens[i];
 		}
+	}
+
+	function coins(uint256 index) external view returns (address) {
+		require(index < _coins.length, "Index out of bounds");
+		return _coins[index];
 	}
 
 	function get_dy(
@@ -47,6 +50,7 @@ contract MockCurveStableSwap {
 
 		tokenOut.transfer(msg.sender, dy);
 
+		emit Exchanged(i, j, _dx, dy);
 		return dy;
 	}
 
