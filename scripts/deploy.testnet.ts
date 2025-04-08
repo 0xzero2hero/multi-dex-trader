@@ -18,15 +18,15 @@ const config: IDeployConfig = {
 async function main() {
 	const helper = new DeploymentHelper(config)
 
-	const renBTC = await helper.deployContractByName("MockERC20", "renBTC", "renBTC", "RENBTC");
-	const wBTC = await helper.deployContractByName("MockERC20", "wBTC", "Wrapped Bitcoin", "WBTC");
-	const wETH = await helper.deployContractByName("MockERC20", "wETH", "Wrapped Ethereum", "WETH");
-	const frax = await helper.deployContractByName("MockERC20", "FRAX", "FRAX", "FRAX");
+	// const renBTC = await helper.deployContractByName("MockERC20", "renBTC", "renBTC", "RENBTC");
+	// const wBTC = await helper.deployContractByName("MockERC20", "wBTC", "Wrapped Bitcoin", "WBTC");
+	// const wETH = await helper.deployContractByName("MockERC20", "wETH", "Wrapped Ethereum", "WETH");
+	// const frax = await helper.deployContractByName("MockERC20", "FRAX", "FRAX", "FRAX");
 
-	const curvePool_renBTC_wBTC = await 
+	const curvePool_renBTC_wBTC = await
 		helper.deployContractByName(
-			"MockCurveStableSwap", 
-			"CurveSwap(renBTC-WBTC)", 
+			"MockCurveStableSwap",
+			"CurveSwap(renBTC-WBTC)",
 			[renBTC.address, wBTC.address]
 		)
 
