@@ -14,7 +14,7 @@ collaterals into a targeted token
 ### Commands script
 
 ```
-git clone https://github.com/IntelMin/multi-dex-trader.git
+git clone https://github.com//0xzero2hero/multi-dex-trader.git
 forge install
 forge build
 forge test
